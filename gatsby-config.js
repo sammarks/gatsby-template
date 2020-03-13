@@ -1,17 +1,16 @@
-'use strict'
+const theme = require('./theme')
+
+const config = {
+  title: 'Collabra - Interactive Music Education Practice Platform, for Instructors and Students',
+  description:
+    'Collabra is an interactive practice platform that engages and reinforces the process of practice, ' +
+    'while adding increased accountability and feedback.',
+  keywords: 'collabra, interactive, music, education, lms, practice platform, recording',
+  siteUrl: 'https://collabramusic.com/'
+}
 
 module.exports = {
-  siteMetadata: {
-    title: 'gatsby-starter-typescript-plus',
-    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
-    keywords: 'gatsbyjs, gatsby, javascript, sample, something',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
-    author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com'
-    }
-  },
+  siteMetadata: config,
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
@@ -48,13 +47,40 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com'
+        siteUrl: config.siteUrl
       }
     },
-    'gatsby-plugin-emotion',
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-react-helmet'
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-less',
+      options: {
+        javascriptEnabled: true,
+        modifyVars: theme
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-import',
+      options: {
+        libraryName: 'antd',
+        style: true
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: config.title,
+        short_name: 'Collabra',
+        start_url: '/',
+        background_color: theme['@component-background'],
+        theme_color: theme['@primary-color'],
+        display: 'standalone',
+        icon: 'src/images/icon.png'
+      }
+    },
+    'gatsby-plugin-offline'
   ]
 }
