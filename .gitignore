@@ -1,3 +1,6 @@
+.idea
+schema.graphql
+
 # =========================
 # Node.js-Specific Ignores
 # =========================
